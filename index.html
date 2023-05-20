@@ -43,6 +43,21 @@
       }
     }
 
+    /* Countdown Slide Up Animation */
+    .countdown-slide-up {
+      animation: slideUp 1s ease-in-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-20px);
+      }
+    }
+
     /* Countdown Expired Animation */
     #countdown.expired {
       color: #ff0000;
@@ -63,7 +78,12 @@
 <body>
   <h1>141412 Legality</h1>
   <p>Countdown until 141412 can operate legally:</p>
-  <div id="countdown"></div>
+  <div id="countdown">
+    <span id="days" class="countdown-animate"></span>d
+    <span id="hours" class="countdown-animate"></span>h
+    <span id="minutes" class="countdown-animate"></span>m
+    <span id="seconds" class="countdown-animate"></span>s
+  </div>
   <p>Join our Discord server for more information:</p>
   <a href="https://dsc.gg/dimisaio" target="_blank">https://dsc.gg/dimisaio</a>
 
@@ -89,33 +109,35 @@
 
     // Update the countdown timer
     function updateCountdown() {
-      var countdownElement = document.getElementById("countdown");
+      var daysElement = document.getElementById("days");
+      var hoursElement = document.getElementById("hours");
+      var minutesElement = document.getElementById("minutes");
+      var secondsElement = document.getElementById("seconds");
       var time = getTimeRemaining();
 
-      countdownElement.innerHTML =
-        time.days + "d " +
-        time.hours + "h " +
-        time.minutes + "m " +
-        "<span class='countdown-animate'>" + time.seconds + "s" + "</span>";
+      daysElement.innerHTML = time.days;
+      hoursElement.innerHTML = time.hours;
+      minutesElement.innerHTML = time.minutes;
+      secondsElement.innerHTML = "<span class='countdown-animate'>" + time.seconds + "</span>";
 
       if (time.total <= 0) {
         // Countdown expired
-        countdownElement.classList.add("expired");
-        countdownElement.innerHTML = "EXPIRED";
+        daysElement.innerHTML = "contactus@dimisaio.x10.mx";
+        hoursElement.innerHTML = "";
+        minutesElement.innerHTML = "";
+        secondsElement.innerHTML = "";
+        daysElement.classList.add("expired");
+      } else {
+        // Animate each part of the countdown
+        daysElement.classList.add("countdown-slide-up");
+        hoursElement.classList.add("countdown-slide-up");
+        minutesElement.classList.add("countdown-slide-up");
+        secondsElement.classList.add("countdown-animate");
       }
     }
 
     // Update countdown every second
     setInterval(updateCountdown, 1000);
-  </script>
-<script>
-    // Load Open Sans font asynchronously
-    (function () {
-      var css = document.createElement('link');
-      css.href = 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap';
-      css.rel = 'stylesheet';
-      document.getElementsByTagName('head')[0].appendChild(css);
-    })();
   </script>
 </body>
 </html>
