@@ -2,6 +2,53 @@
 <html>
 <head>
   <title>141412 Legality</title>
+  <style>
+    /* Custom CSS */
+    body {
+      background-color: #000;
+      color: #ff0000;
+      font-family: "Open Sans", Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-top: 50px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    #countdown {
+      font-size: 30px;
+      margin-bottom: 50px;
+      animation: scaleIn 2s ease-in;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <script>
     // Calculate the remaining time until June 25, 2025 (midnight)
     function getTimeRemaining() {
@@ -35,8 +82,10 @@
         time.seconds + "s ";
 
       if (time.total <= 0) {
-        // Redirect to the contact email address
-        window.location.href = "mailto:contactus@dimisaio.x10.mx";
+        // Redirect to the contact page
+        document.body.style.backgroundColor = "#000";
+        document.body.style.color = "#ff0000";
+        document.body.innerHTML = "<h1>URGENT</h1><p>Contact: contactus@dimisaio.x10.mx</p>";
       }
     }
 
@@ -48,5 +97,15 @@
   <h1>141412 Legality</h1>
   <p>Countdown until June 25, 2025 (midnight):</p>
   <div id="countdown"></div>
+
+  <script>
+    // Load Open Sans font asynchronously
+    (function () {
+      var css = document.createElement('link');
+      css.href = 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap';
+      css.rel = 'stylesheet';
+      document.getElementsByTagName('head')[0].appendChild(css);
+    })();
+  </script>
 </body>
 </html>
