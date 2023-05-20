@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>141412 Legality</title>
+  <script>
+    // Calculate the remaining time until June 25, 2025 (midnight)
+    function getTimeRemaining() {
+      var targetDate = new Date("June 25, 2025 00:00:00");
+      var now = new Date();
+      var timeRemaining = targetDate - now;
+      var seconds = Math.floor((timeRemaining / 1000) % 60);
+      var minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+      var hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+      var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+
+      return {
+        total: timeRemaining,
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+      };
+    }
+
+    // Update the countdown timer
+    function updateCountdown() {
+      var countdownElement = document.getElementById("countdown");
+
+      var time = getTimeRemaining();
+
+      countdownElement.innerHTML =
+        time.days + "d " +
+        time.hours + "h " +
+        time.minutes + "m " +
+        time.seconds + "s ";
+
+      if (time.total <= 0) {
+        // Redirect to the contact email address
+        window.location.href = "mailto:contactus@dimisaio.x10.mx";
+      }
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+  </script>
+</head>
+<body>
+  <h1>141412 Legality</h1>
+  <p>Countdown until June 25, 2025 (midnight):</p>
+  <div id="countdown"></div>
+</body>
+</html>
