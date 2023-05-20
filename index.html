@@ -6,7 +6,7 @@
     /* Custom CSS */
     body {
       background-color: #000;
-      color: #ff0000;
+      color: #ffffff;
       font-family: "Open Sans", Arial, sans-serif;
       text-align: center;
     }
@@ -24,31 +24,49 @@
     }
 
     #countdown {
-      font-size: 30px;
+      font-size: 48px;
       margin-bottom: 50px;
       animation: scaleIn 2s ease-in;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
+    /* Countdown Animation */
+    .countdown-animate {
+      animation: countdownScale 1s infinite alternate;
+    }
+
+    @keyframes countdownScale {
       from {
-        opacity: 0;
+        transform: scale(1);
       }
       to {
-        opacity: 1;
+        transform: scale(1.1);
       }
     }
 
-    @keyframes scaleIn {
+    /* Countdown Expired Animation */
+    #countdown.expired {
+      color: #ff0000;
+      animation: countdownExpired 0.5s infinite alternate;
+    }
+
+    @keyframes countdownExpired {
       from {
-        transform: scale(0);
+        color: #ff0000;
       }
       to {
-        transform: scale(1);
+        color: #ffffff;
       }
     }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>141412 Legality</h1>
+  <p>Countdown until 141412 can operate legally:</p>
+  <div id="countdown"></div>
+  <p>Join our Discord server for more information:</p>
+  <a href="https://dsc.gg/dimisaio" target="_blank">https://dsc.gg/dimisaio</a>
+
   <script>
     // Calculate the remaining time until June 25, 2025 (midnight)
     function getTimeRemaining() {
@@ -72,33 +90,25 @@
     // Update the countdown timer
     function updateCountdown() {
       var countdownElement = document.getElementById("countdown");
-
       var time = getTimeRemaining();
 
       countdownElement.innerHTML =
         time.days + "d " +
         time.hours + "h " +
         time.minutes + "m " +
-        time.seconds + "s ";
+        "<span class='countdown-animate'>" + time.seconds + "s" + "</span>";
 
       if (time.total <= 0) {
-        // Redirect to the contact page
-        document.body.style.backgroundColor = "#000";
-        document.body.style.color = "#ff0000";
-        document.body.innerHTML = "<h1>URGENT</h1><p>Contact: contactus@dimisaio.x10.mx</p>";
+        // Countdown expired
+        countdownElement.classList.add("expired");
+        countdownElement.innerHTML = "EXPIRED";
       }
     }
 
     // Update countdown every second
     setInterval(updateCountdown, 1000);
   </script>
-</head>
-<body>
-  <h1>141412 Legality</h1>
-  <p>Countdown until June 25, 2025 (midnight):</p>
-  <div id="countdown"></div>
-
-  <script>
+<script>
     // Load Open Sans font asynchronously
     (function () {
       var css = document.createElement('link');
